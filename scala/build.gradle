@@ -1,0 +1,21 @@
+buildDir = '/dev/shm/gradle-scala/scala'
+
+apply plugin: 'scala'
+def scalaVersion = '2.11.8'
+
+version = '0.2'
+
+tasks.withType(ScalaCompile) {
+    configure(scalaCompileOptions.forkOptions) {
+        memoryMaximumSize = '2g'
+        jvmArgs = ['-Xmx1g']
+    }
+    scalaCompileOptions.additionalParameters = [
+            "-feature", "-target:jvm-1.8"  // TODO not enough to generate java 8 byte code
+    ]
+}
+
+dependencies {
+    compile "org.scala-lang:scala-compiler:$scalaVersion"
+    compile "org.scala-lang:scala-library:$scalaVersion"
+}

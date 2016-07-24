@@ -1,0 +1,9 @@
+buildDir = '/dev/shm/gradle-scala'
+
+subprojects {
+    repositories {
+        mavenCentral()
+    }
+
+    group = 'home'
+}
