@@ -143,4 +143,43 @@ public class TryAndErrorTest {
 
         list.forEach(System.out::println);
     }
+
+    @Test public void test3() {
+        // Given an array of n element a(0) ... a(n-1), find all the combinations of m elements in there (of course
+        // each combination has no order, if we want them to have order, call the method in test2 for each combination).
+
+        // Idea: look at all n-bit binary strings from 0...0 to 1...1, get only strings with m 1 bits, get the indices
+        // of these 1 bits as well.
+        int[] a = { 1, 9, 5, 2 };
+        int m = 3;
+        IntStream.range(0, (int) Math.pow(2, a.length))
+                .mapToObj(i -> {
+                    String s = Integer.toBinaryString(i);
+                    return Stream.generate(() -> "0").limit(a.length - s.length()).collect(Collectors.joining()) + s;
+                })
+                .map(s -> {
+                    int[] result = new int[m];
+                    int j = 0;
+                    char[] cs = s.toCharArray();
+                    for (int i = 0; i < cs.length; i++) {
+                        if (cs[i] == '1') {
+                            if (j == m) {  // too many bit 1's in this string s
+                                return null;
+                            }
+                            else {
+                                result[j++] = i;
+                            }
+                        }
+                    }
+                    return j == m  ? result : null /* too few bit 1's in string s */;
+                })
+                .filter(array -> array != null)
+                .forEach(ints -> {
+                    System.out.println(Arrays.toString(Arrays.stream(ints).map(i -> a[i]).toArray()));
+                });
+    }
+
+    @Test public void test4() {
+        System.out.printf("%20s", Integer.toBinaryString(7));
+    }
 }
