@@ -11,7 +11,16 @@ tasks.withType(ScalaCompile) {
         jvmArgs = ['-Xmx1g']
     }
     scalaCompileOptions.additionalParameters = [
-            "-feature", "-target:jvm-1.8"  // TODO not enough to generate java 8 byte code
+            // this is a box of recommended warnings. If you can be -Xlint clean, it's a good idea to stay that way.
+            "-Xlint",
+            "-language:postfixOps",    // so that we can use tuple _2
+            "-feature",
+            "-unchecked",              // turns on verbose warnings about dangerous casts
+            // a Scala 2.11 only option, catches a few more things than IDEA's unused import warnings. DO NOT manually
+            //   remove imports even if the code still compiles (because of the implicit thingy).
+            "-Ywarn-unused-import",
+            // TODO check at home if these flags help generate java 8 byte code (javap -cp ... -verbose package.MyClass)
+            "-Ybackend:GenBCode", "-Ydelambdafy:method", "-target:jvm-1.8"
     ]
 }
 
