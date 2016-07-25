@@ -41,4 +41,6 @@ dependencies {
 
     compile 'io.springfox:springfox-swagger2:+'    // springfox is a Swagger 2 implementation
     compile 'io.springfox:springfox-swagger-ui:+'  // http://host/context-root/swagger-ui.html
+    // https://github.com/swagger-api/swagger-ui#header-parameters says we need to use the swagger-js plugin to add
+    // request header parameters
 }

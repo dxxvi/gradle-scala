@@ -2,8 +2,8 @@ This is a gradle project which is used to test Scala, Java (jUnit or Spock), Spr
 
 - SafariBooksOnlineApplication.java: a tiny REST service (Spring Boot) that receives whatever a greasemonkey script
                                      sends; another tiny REST service is used to tell the app to write everything it
-                                     receives so far to files and reset its memory.
-                                     main/resources/static, main/resources/templates/index.html (shows how to get the
+                                     receives so far to files and reset its memory; springfox is used to provide REST API documentation in a Swagger style 
+  + main/resources/static, main/resources/templates/index.html (shows how to get the
                                      context path with thymeleaf), main/resources/application.yaml go with this app.
 - test/groovy/home/DataDrivenSpec.java shows some Spock features
   test/resources/META-INF/services/com.athaydes.spockframework.report...: to make Spock generate beautiful test reports
