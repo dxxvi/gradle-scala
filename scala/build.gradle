@@ -1,6 +1,18 @@
 buildDir = '/dev/shm/gradle-scala/scala'
 
+buildscript {
+    repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.github.maiflai:gradle-scalatest:0.13'
+    }
+}
+
 apply plugin: 'scala'
+apply plugin: 'com.github.maiflai.scalatest'  // this plugin enables the use of scalatest in a gradle scala project
 def scalaVersion = '2.11.8'
 
 version = '0.2'
@@ -19,7 +31,7 @@ tasks.withType(ScalaCompile) {
             // a Scala 2.11 only option, catches a few more things than IDEA's unused import warnings. DO NOT manually
             //   remove imports even if the code still compiles (because of the implicit thingy).
             "-Ywarn-unused-import",
-            // TODO check at home if these flags help generate java 8 byte code (javap -cp ... -verbose package.MyClass)
+            // javap -cp ... -verbose package.MyClass to check if it's java 8 byte code
             "-Ybackend:GenBCode", "-Ydelambdafy:method", "-target:jvm-1.8"
     ]
 }
@@ -27,4 +39,7 @@ tasks.withType(ScalaCompile) {
 dependencies {
     compile "org.scala-lang:scala-compiler:$scalaVersion"
     compile "org.scala-lang:scala-library:$scalaVersion"
+
+    testCompile "org.scalatest:scalatest_2.11:2.2.+"
+    testRuntime "org.pegdown:pegdown:1.+"                 // to create html test report
 }

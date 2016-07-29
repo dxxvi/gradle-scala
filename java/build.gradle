@@ -23,7 +23,9 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-actuator'
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.objenesis', module: 'objenesis'
+    }
 
     // mandatory dependencies for using Spock
     compile "org.codehaus.groovy:groovy-all:2.4.7"
