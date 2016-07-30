@@ -13,3 +13,5 @@ This is a gradle project which is used to test Scala, Java (jUnit or Spock), Spr
 - test/java/home/SrtTest.java: modify a subtitle file
 - test/java/home/TryAndErrorTest.java: shows the usefulness of Java 8 lambda syntactic sugar in using brute force to
   solve problems.
+- gulp-express-browsersync: a nodejs application. It uses gulp and browser-sync to automatically reload changes. It uses
+                            express to write REST services. // TODO: need to call its test with gradle.
