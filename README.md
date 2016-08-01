@@ -13,5 +13,9 @@ This is a gradle project which is used to test Scala, Java (jUnit or Spock), Spr
 - test/java/home/SrtTest.java: modify a subtitle file
 - test/java/home/TryAndErrorTest.java: shows the usefulness of Java 8 lambda syntactic sugar in using brute force to
   solve problems.
+- test/java/home/ImageSplittingTest.java: I use phantomjs to render a big image of Google maps (about 4300px by 5300px). 
+                                          The code is in test/resources/map.js. This test will print out the ImageMagick
+                                          commands to cut that big image into smaller images that can be printed on 8x10
+                                          photos at Walgreens or CVS.
 - gulp-express-browsersync: a nodejs application. It uses gulp and browser-sync to automatically reload changes. It uses
                             express to write REST services. // TODO: need to call its test with gradle.

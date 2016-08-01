@@ -11,9 +11,14 @@ buildscript {
     }
 }
 
+// don't know how to run both java junit tests and ScalaTest tests with `gradle test'
+//apply plugin: 'java'
 apply plugin: 'scala'
 apply plugin: 'com.github.maiflai.scalatest'  // this plugin enables the use of scalatest in a gradle scala project
 def scalaVersion = '2.11.8'
+
+// Don't know why it cannot be declared in the root project
+sourceCompatibility = 1.8  // not needed, default value is the version of the current JVM in use
 
 version = '0.2'
 
@@ -42,4 +47,6 @@ dependencies {
 
     testCompile "org.scalatest:scalatest_2.11:2.2.+"
     testRuntime "org.pegdown:pegdown:1.+"                 // to create html test report
+
+    testCompile "junit:junit:4.+"
 }

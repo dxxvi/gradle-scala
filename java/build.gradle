@@ -16,7 +16,9 @@ apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'spring-boot'
 
-sourceCompatibility = 1.8  // not needed, default value is the version of the current JVM in use
+// not needed, default value is the version of the current JVM in use.
+// Don't know why it cannot be declared in the root project
+sourceCompatibility = 1.8
 version = '0.1'
 
 dependencies {
