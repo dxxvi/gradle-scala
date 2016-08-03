@@ -2,6 +2,9 @@ package home.Option_Either_Try
 
 import org.scalatest.FlatSpec
 
+import scala.io.Source
+import scala.util.{Failure, Success, Try}
+
 /**
   * Created by ly on 7/29/16.
   */
@@ -42,6 +45,23 @@ class OptionExperiment extends FlatSpec {
         person match {
             case Some(p) => info(p.toString)
             case None => info("None")
+        }
+    }
+
+    "This test" should "be equivalent to the java test in home.Optional.OptionalExperiment" in {
+        val x = Try(Source.fromFile("/dev/shm/test.txt1")) match {
+            case Failure(_) => new Array[Int](0)
+            case Success(source) =>
+                Vector() ++ source.getLines()                      // don't know how to convert an iterator to an array, so use Vector
+                        .toStream                                  // to not create intermediate collections when using map, filter ...
+                        .map(s => Try(s.toInt))
+                        .filter(t => t.isInstanceOf[Success[Int]])
+                        .map(_.get)
+
+        }
+        x match {
+            case a: Array[Int] => info(a.mkString(", "))
+            case v: Vector[Int] => info(v.mkString(", "))
         }
     }
 }
