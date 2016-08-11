@@ -44,5 +44,17 @@ public class OptionalExperiment {
                 .map(Optional::get);
 
         System.out.println(Arrays.toString(stream.mapToInt(i -> i).toArray()));
+
+        // or ... this idea is from Scala
+        Function<String, Stream<Integer>> convertToStream = s -> {
+            try {
+                return Stream.of(Integer.valueOf(s));
+            }
+            catch (Exception ex) {
+                return Stream.empty();
+            }
+        };
+
+        getLines.apply(Paths.get("/dev/shm/test.txt")).flatMap(convertToStream).mapToInt(i -> i).toArray();
     }
 }
