@@ -44,6 +44,10 @@ tasks.withType(ScalaCompile) {
 dependencies {
     compile "org.scala-lang:scala-compiler:$scalaVersion"
     compile "org.scala-lang:scala-library:$scalaVersion"
+    
+    compile "org.scalikejdbc:scalikejdbc_2.11:2.+"
+
+    testCompile "com.h2database:h2:1.+"
 
     testCompile "org.scalatest:scalatest_2.11:2.2.+"
     testRuntime "org.pegdown:pegdown:1.+"                 // to create html test report
