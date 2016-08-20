@@ -49,19 +49,23 @@ class OptionExperiment extends FlatSpec {
     }
 
     "This test" should "be equivalent to the java test in home.Optional.OptionalExperiment" in {
-        val x = Try(Source.fromFile("/dev/shm/test.txt1")) match {
-            case Failure(_) => new Array[Int](0)
-            case Success(source) =>
-                Vector() ++ source.getLines()                      // don't know how to convert an iterator to an array, so use Vector
-                        .toStream                                  // to not create intermediate collections when using map, filter ...
-                        .map(s => Try(s.toInt))
-                        .filter(t => t.isInstanceOf[Success[Int]])
-                        .map(_.get)
+        val y = Try(Source.fromFile("/dev/shm/test.txt1")) match {
+            case Failure(_) => Array[Int]()
+            case Success(source) =>    // this needs 2 transformations, so we need a stream
+                source.getLines.toStream.map(s => Try(s.toInt)).collect({ case Success(i) => i }).toArray
+        }
 
+        Try(Source.fromFile("/dev/shm/test.txt1")) match {
+            case Failure(_) => Array[Int]()
+            case Success(source) => source.getLines.flatMap(s => Try(s.toInt) match {
+                case Success(i) => Seq(i)
+                case Failure(_) => Seq()
+            }).toArray                 // just 1 transformation in this case
         }
-        x match {
-            case a: Array[Int] => info(a.mkString(", "))
-            case v: Vector[Int] => info(v.mkString(", "))
-        }
+
+        Try(Source.fromFile("/dev/shm/test.txt")) match {
+            case Failure(_)      => Array[Int]()
+            case Success(source) => source.getLines.flatMap(s => Try(s.toInt).toOption.toSeq).toArray
+        }                              // exactly like the pattern matching above but shorter
     }
 }
