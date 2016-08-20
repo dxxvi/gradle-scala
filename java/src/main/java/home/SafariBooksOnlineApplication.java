@@ -75,16 +75,28 @@ public class SafariBooksOnlineApplication extends WebMvcConfigurerAdapter {
         return result;
     }
 
-    @RequestMapping(path = "/safaribooksonline", method = RequestMethod.POST,
+    @RequestMapping(path = "/safaribooksonline-text", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Map<String, Object> safaribooksonline(@RequestBody Data data) {
+    public Map<String, Object> text(@RequestBody Data data) {
         logger.debug("textarea: {}", data.getTextarea());
         logger.debug("wgetimg: {}", data.getWgetimg());
 
         list.add(data);
 
         Map<String, Object> result = new LinkedHashMap<>();
-        result.put("now", LocalDateTime.now().format(dtf));
+        result.put("now text", LocalDateTime.now().format(dtf));
+        return result;
+    }
+
+    @RequestMapping(path = "/safaribooksonline-video", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Map<String, Object> video(@RequestBody Data data) throws IOException {
+        Files.write(Paths.get("/dev/shm/video.txt"), data.getWgetimg().getBytes(),
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        logger.debug("video link is ready {}", LocalDateTime.now().format(dtf));
+
+        Map<String, Object> result = new LinkedHashMap<>();
+        result.put("now video", LocalDateTime.now().format(dtf));
         return result;
     }
 }

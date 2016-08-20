@@ -1,8 +1,12 @@
 This is a gradle project which is used to test Scala, Java (jUnit or Spock), Spring Boot.
 
-- SafariBooksOnlineApplication.java: a tiny REST service (Spring Boot) that receives whatever a greasemonkey script
-                                     sends; another tiny REST service is used to tell the app to write everything it
-                                     receives so far to files and reset its memory; springfox is used to provide REST API documentation in a Swagger style 
+- SafariBooksOnlineApplication.java: 2 tiny REST services (Spring Boot) that receive whatever a greasemonkey script
+                                     sends: safaribooksonline-text receives html code and image url's
+                                     while safaribooksonline-video receives wget commands with video url's, writes it in
+                                     a file then in a terminal you should run while inotifywait -q -e modify /dev/shm/video.txt > /dev/null; do . /dev/shm/video.txt; done
+                                     to automatice download videos when there's a new video; another tiny REST service is used to tell the app to write everything it
+                                     receives so far to files and reset its memory; springfox is used to provide REST
+                                     API documentation in a Swagger style
   + main/resources/static, main/resources/templates/index.html (shows how to get the
                                      context path with thymeleaf), main/resources/application.yaml go with this app.
 - test/groovy/home/DataDrivenSpec.java shows some Spock features
