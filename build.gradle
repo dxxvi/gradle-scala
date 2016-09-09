@@ -6,4 +6,8 @@ subprojects {
     }
 
     group = 'home'
+
+    task showMeCache << {              // show where gradle saves the .jar files
+        configurations.compile.each { println it }
+    }
 }

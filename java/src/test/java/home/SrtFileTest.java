@@ -1,5 +1,6 @@
 package home;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -34,6 +35,7 @@ public class SrtFileTest {
                 line;
     }
 
+    @Ignore
     @Test public void addOffsetTest() throws IOException {
         List<String> lines =
                 Files.lines(Paths.get("/dev/shm/Everybody.Wants.Some.2016.1080p.BluRay.x264-[YTS.AG].srt"))

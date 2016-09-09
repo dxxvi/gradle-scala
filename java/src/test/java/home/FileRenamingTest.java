@@ -1,5 +1,6 @@
 package home;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -13,12 +14,13 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by ly on 6/26/16.
  */
 public class FileRenamingTest {
+    @Ignore
     @Test public void test() throws IOException {
         final String s = " - ";
-        Files.list(Paths.get("/dev/shm/Queen - The Best Songs")).forEach(path -> {
-            String t = path.getFileName().toString();
+        Files.list(Paths.get("/dev/shm/Hotel Deluxe Music Vol.7 - The Best in Lounge and Chill out Essential Luxury Hits")).forEach(path -> {
+            String t = path.getFileName().toString().substring(4);
             try {
-                Files.move(path, path.getParent().resolve(t.replaceAll(" .", ".")));
+                Files.move(path, path.getParent().resolve(t));
             }
             catch (IOException ioex) {
                 throw new RuntimeException(ioex);

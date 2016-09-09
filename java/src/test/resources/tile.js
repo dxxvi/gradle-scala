@@ -6,9 +6,9 @@
  */
 
 var f1 = function(status) {
-    console.log('Status: ' + status);
+    // console.log('Status: ' + status);
     if(status === 'success') {
-        setTimeout(f2, 10000);
+        setTimeout(f2, 7000);
     }
     else {
         phantom.exit();
@@ -48,6 +48,6 @@ var f3 = function() {
 };
 
 var page = require('webpage').create();
-page.viewportSize = { width: 10240, height: 10240 };
+page.viewportSize = { width: 7000, height: 7000 };
 
-page.open('https://www.google.com/maps/@40.58,-74.64,15z?force=lite', f1);
+page.open('https://www.google.com/maps/@37.2,-92.9,8z?force=lite', f1);

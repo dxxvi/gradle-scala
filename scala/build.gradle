@@ -7,7 +7,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'gradle.plugin.com.github.maiflai:gradle-scalatest:0.13'
+        classpath 'gradle.plugin.com.github.maiflai:gradle-scalatest:0.14'
     }
 }
 
@@ -30,7 +30,7 @@ tasks.withType(ScalaCompile) {
     scalaCompileOptions.additionalParameters = [
             // this is a box of recommended warnings. If you can be -Xlint clean, it's a good idea to stay that way.
             "-Xlint",
-            "-language:postfixOps",    // so that we can use tuple _2
+            // "-language:postfixOps",    // so that we can use tuple _2; DO NOT use this. Let's do the import.
             "-feature",
             "-unchecked",              // turns on verbose warnings about dangerous casts
             // a Scala 2.11 only option, catches a few more things than IDEA's unused import warnings. DO NOT manually

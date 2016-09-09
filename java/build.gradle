@@ -2,7 +2,7 @@ buildDir = '/dev/shm/gradle-scala/java'
 
 buildscript {
     ext {
-        springBootVersion = '1.3.6.RELEASE'
+        springBootVersion = '1.4.0.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -25,6 +25,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-actuator'
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    compile 'org.springframework.boot:spring-boot-starter-jdbc'
     testCompile('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.objenesis', module: 'objenesis'
     }
@@ -47,4 +48,7 @@ dependencies {
     compile 'io.springfox:springfox-swagger-ui:+'  // http://host/context-root/swagger-ui.html
     // https://github.com/swagger-api/swagger-ui#header-parameters says we need to use the swagger-js plugin to add
     // request header parameters
+
+    testCompile 'com.h2database:h2:1.4.192'
+    testCompile 'com.zaxxer:HikariCP:2.4.7'        // a connection pool
 }
